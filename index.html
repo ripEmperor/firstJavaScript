@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>rock paper scissors</title>
+</head>
+<body>
+    <script>
+
+        function randomIntFromInterval(min, max) { // min and max included 
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
+        // 0 = rock, 1 = paper, 2 = scissors
+        const rndInt = randomIntFromInterval(0, 2)
+        let answer = prompt("rock, paper or scissor: ").toLowerCase();
+        
+        if (answer == "rock") {
+            if (rndInt == 0) {
+                console.log("draw, rock")
+            } else if (rndInt == 1) {
+                console.log("you lose, paper")
+            } else if (rndInt == 2) {
+                console.log("you win, scissors")
+            }
+        } else if (answer == "paper") {
+            if (rndInt == 0) {
+                console.log("you win, rock")
+            } else if (rndInt == 1) {
+                console.log("draw, paper")
+            } else if (rndInt == 2) {
+                console.log("you lose, scissors")
+            }
+        } else if (answer == "scissors") {
+            if (rndInt == 0) {
+                console.log("you lose, rock")
+            } else if (rndInt == 1) {
+                console.log("you win, paper")
+            } else if (rndInt == 2) {
+                console.log("draw, scissors")
+            }
+        }
+
+    </script>
+</body>
+</html>
