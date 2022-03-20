@@ -5,9 +5,23 @@
     <title>rock paper scissors</title>
 </head>
 <body>
+    <button id="btn" class="rock">rock</button>
+    <button id="btn" class="paper">paper</button>
+    <button id="btn" class="scissors">scissors</button>
+
+    <div class="status">
+        <div class="result"></div>
+        <div class="playerResult"></div>
+    </div> 
+
     <script>
 
-        let xRounds = parseInt(prompt("how many rounds: "));
+        const buttons = document.querySelectorAll('#btn');
+        buttons.forEach((button) => {
+            button.addEventListener('click', function(e) {
+                playRound(e.target.className);
+            });
+        });
 
         function randomIntFromInterval(min, max) { // min and max included 
             return Math.floor(Math.random() * (max - min + 1) + min)
@@ -16,52 +30,66 @@
         let playerScore = 0;
         let computerScore = 0;
 
-        for (let i = 0; i < xRounds; i++) {
+        function playRound(answer) {
+
+            const result = document.querySelector('.result');
+            const playerResult = document.querySelector('.playerResult');
 
             // 0 = rock, 1 = paper, 2 = scissors
             const rndInt = randomIntFromInterval(0, 2)
-            let answer = prompt("rock, paper or scissor: ").toLowerCase();
 
             if (answer == "rock") {
                 if (rndInt == 0) {
-                    console.log("draw, rock")
+                    result.textContent = "draw, rock"
                 } else if (rndInt == 1) {
-                    console.log("you lose, paper")
+                    result.textContent = "you lose, paper"
                     computerScore += 1
                 } else if (rndInt == 2) {
-                    console.log("you win, scissors")
+                    result.textContent = "you win, scissors"
                     playerScore += 1
                 }
             } else if (answer == "paper") {
                 if (rndInt == 0) {
-                    console.log("you win, rock")
+                    result.textContent = "you win, rock"
                     playerScore += 1
                 } else if (rndInt == 1) {
-                    console.log("draw, paper")
+                    result.textContent = "draw, paper"
                 } else if (rndInt == 2) {
-                    console.log("you lose, scissors")
+                    result.textContent = "you lose, scissors"
                     computerScore += 1
                 }
             } else if (answer == "scissors") {
                 if (rndInt == 0) {
-                    console.log("you lose, rock")
+                    result.textContent = "you lose, rock"
                     computerScore += 1
                 } else if (rndInt == 1) {
-                    console.log("you win, paper")
+                    result.textContent = "you win, paper"
                     playerScore += 1
                 } else if (rndInt == 2) {
-                    console.log("draw, scissors")
-
+                    result.textContent = "draw, scissors"
                 }
             }
-        }
 
-        if (playerScore > computerScore) {
-            console.log("you won the game " + playerScore + "-" + computerScore)
-        } else if (playerScore < computerScore) {
-            console.log("you lost the game " + playerScore + "-" + computerScore)
-        } else {
-            console.log("end draw")
+            playerResult.textContent = playerScore.toString() + "-" + computerScore.toString()
+
+            if (playerScore >= 5) {
+                playerScore = 0;
+                computerScore = 0;
+                playerResult.textContent = "YOU ARE THE WINNER!"
+            } else if (computerScore >= 5) {
+                playerResult.textContent = "YOU ARE THE LOSER!"
+                playerScore = 0;
+                computerScore = 0;
+            }
+
+            if (playerScore > computerScore) {
+                console.log("you won the game " + playerScore + "-" + computerScore)
+            } else if (playerScore < computerScore) {
+                console.log("you lost the game " + playerScore + "-" + computerScore)
+            } else {
+                console.log("end draw")
+            }
+
         }
 
     </script>
